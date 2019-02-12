@@ -9,15 +9,27 @@ body {
   text-align: center;
 }
 
-.is-active {
-  font-weight: 900;
-  color: red;
-}
-
 button {
   cursor: pointer;
   outline: none;
 }
 button:disabled {
   cursor: default;
+}
+
+.is-active {
+  font-weight: bold;
+  color: #e0245e;
+}
+
+a {
+  display: inline-block;
+  margin: 0 2rem;
+  color: #e0245e;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+}
+h1 {
+  border-bottom: 2px solid #000;
+  padding-bottom: 2rem;
 }

@@ -1,9 +1,9 @@
 import React from 'react';
 
-const EditExpensePage = () => {
+const EditExpensePage = ({ match }) => {
   return (
     <div>
-      <p>Edit Page</p>
+      <p>Edit id: {match.params.id}</p>
     </div>
   );
 };
