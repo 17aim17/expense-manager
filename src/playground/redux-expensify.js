@@ -145,6 +145,35 @@ const filtersReducer = (state = filtersReducerDefaultSate, action) => {
 };
 
 // ============================
+// get Visible expenses
+// ============================
+
+const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
+  return expenses
+    .filter(expense => {
+      const startDateMatch =
+        typeof startDate !== 'number' || expense.createAt >= startDate;
+
+      const endDateMatch =
+        typeof endDate !== 'number' || expense.createAt <= endDate;
+
+      const textMatch = expense.description
+        .toLowerCase()
+        .includes(text.toLowerCase());
+
+      return startDateMatch && endDateMatch && textMatch;
+    })
+    .sort((a, b) => {
+      if (sortBy === 'date') {
+        return a.createAt < b.createAt ? 1 : -1;
+      }
+      if (sortBy === 'amount') {
+        return a.amount < b.amount ? 1 : -1;
+      }
+    });
+};
+
+// ============================
 // store Creation
 // ============================
 const store = createStore(
@@ -155,34 +184,43 @@ const store = createStore(
 );
 
 store.subscribe(() => {
-  console.log(store.getState());
+  const state = store.getState();
+  const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
+  console.log(visibleExpenses);
 });
 
-// // Exepnse Actions
-// const expense1 = store.dispatch(
-//   addExpenses({ description: 'Hello', note: 'World', amount: 100 })
-// );
-
-// const expense2 = store.dispatch(
-//   addExpenses({ description: 'Wordl', amount: 200 })
-// );
+// Exepnse Actions
+// ====================
+const expense2 = store.dispatch(
+  addExpenses({ description: 'Coffee', amount: 200 })
+);
+const expense1 = store.dispatch(
+  addExpenses({ description: 'Rent', note: 'World', amount: 100 })
+);
+const expense3 = store.dispatch(
+  addExpenses({ description: 'Rent', note: 'World', amount: 10 })
+);
 
 // store.dispatch(removeExpenses({ id: expense1.expense.id }));
 
-// store.dispatch(editExpense(expense2.expense.id, { amount: 5 }));
+store.dispatch(editExpense(expense2.expense.id, { amount: 5000 }));
 
-// // Filters Actions
-
+// Filters Actions
+// ====================
 // store.dispatch(setTextFilter('Rent'));
 
-// store.dispatch(sortByAmount());
+store.dispatch(sortByAmount());
 // store.dispatch(sortByDate());
 
-store.dispatch(setStartDate(125));
-store.dispatch(setStartDate());
+// store.dispatch(setStartDate(1549966613990));
+// store.dispatch(setStartDate());
 
-store.dispatch(setEndDate(1250));
-store.dispatch(setEndDate());
+// store.dispatch(setEndDate(1549966613992));
+// store.dispatch(setEndDate());
+
+// ==========================
+// demo
+// ==========================
 
 // const demoState = {
 //   expenses: [
@@ -202,13 +240,13 @@ store.dispatch(setEndDate());
 //   }
 // };
 
-const user = {
-  name: 'Ashish',
-  age: 19
-};
-console.log({
-  age: 27,
-  ...user,
-  locaion: 'Sonipat',
-  name: 'Ash'
-});
+// const user = {
+//   name: 'Ashish',
+//   age: 19
+// };
+// console.log({
+//   age: 27,
+//   ...user,
+//   locaion: 'Sonipat',
+//   name: 'Ash'
+// });
