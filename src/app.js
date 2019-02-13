@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
@@ -21,6 +22,15 @@ store.subscribe(() => {
 
 store.dispatch(addExpenses({ description: 'Water Bill', amount: 100 }));
 store.dispatch(addExpenses({ description: 'Electricity Bill', amount: 10 }));
-store.dispatch(setTextFilter('Water'));
 
-ReactDOM.render(<AppRouter />, document.getElementById('app'));
+setTimeout(() => {
+  store.dispatch(setTextFilter('Rent'));
+}, 3000);
+
+const jsx = (
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>
+);
+
+ReactDOM.render(jsx, document.getElementById('app'));

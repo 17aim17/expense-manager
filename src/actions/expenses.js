@@ -15,7 +15,7 @@ export const addExpenses = ({
       description,
       note,
       amount,
-      createAt: new Date().getTime()
+      createdAt: new Date().getTime()
     }
   };
 };
