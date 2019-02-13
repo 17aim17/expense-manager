@@ -6,7 +6,8 @@ import uuidv1 from 'uuid/v1';
 export const addExpenses = ({
   description = '',
   note = '',
-  amount = 0
+  amount = 0,
+  createdAt = 0
 } = {}) => {
   return {
     type: 'ADD_EXPENSE',
@@ -15,7 +16,7 @@ export const addExpenses = ({
       description,
       note,
       amount,
-      createdAt: new Date().getTime()
+      createdAt
     }
   };
 };
