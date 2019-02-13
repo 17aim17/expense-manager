@@ -9,7 +9,7 @@ const Header = () => {
         Home
       </NavLink>
       <NavLink to="/create" activeClassName="is-active">
-        Add Exopense
+        Add Expense
       </NavLink>
       <NavLink to="/help" activeClassName="is-active">
         Help Page

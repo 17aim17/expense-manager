@@ -14,13 +14,15 @@ export default class ExpenseForm extends Component {
       note: '',
       amount: '',
       createdAt: moment(),
-      calanderFocused: false
+      calanderFocused: false,
+      error: ''
     };
     this.onDescriptionChange = this.onDescriptionChange.bind(this);
     this.onNoteChange = this.onNoteChange.bind(this);
     this.onAmountChange = this.onAmountChange.bind(this);
     this.onDateChange = this.onDateChange.bind(this);
     this.onFocusChange = this.onFocusChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
   onDescriptionChange(e) {
     const description = e.target.value;
@@ -64,10 +66,35 @@ export default class ExpenseForm extends Component {
       };
     });
   }
+  onSubmit(e) {
+    e.preventDefault();
+    if (!this.state.description || !this.state.amount) {
+      // Set error state
+      this.setState(() => {
+        return {
+          error: 'Please provide description and Amount'
+        };
+      });
+    } else {
+      this.setState(() => {
+        return {
+          error: ''
+        };
+      });
+      this.props.onSubmit({
+        //this is the props coming from AddExpensePage
+        description: this.state.description,
+        amount: parseFloat(this.state.amount, 10) * 100,
+        note: this.state.note,
+        createdAt: this.state.createdAt.valueOf()
+      });
+    }
+  }
   render() {
     return (
       <div>
-        <form>
+        {this.state.error && <p>{this.state.error}</p>}
+        <form onSubmit={this.onSubmit}>
           <input
             type="text"
             placeholder="description"
