@@ -1,4 +1,10 @@
 import React, { Component } from 'react';
+import moment from 'moment';
+import { SingleDatePicker } from 'react-dates';
+import 'react-dates/lib/css/_datepicker.css';
+
+const now = moment().format('ddd , MMM Do YYYY');
+console.log(now);
 
 export default class ExpenseForm extends Component {
   constructor(props) {
@@ -6,11 +12,15 @@ export default class ExpenseForm extends Component {
     this.state = {
       description: '',
       note: '',
-      amount: ''
+      amount: '',
+      createdAt: moment(),
+      calanderFocused: false
     };
     this.onDescriptionChange = this.onDescriptionChange.bind(this);
     this.onNoteChange = this.onNoteChange.bind(this);
     this.onAmountChange = this.onAmountChange.bind(this);
+    this.onDateChange = this.onDateChange.bind(this);
+    this.onFocusChange = this.onFocusChange.bind(this);
   }
   onDescriptionChange(e) {
     const description = e.target.value;
@@ -30,13 +40,29 @@ export default class ExpenseForm extends Component {
   }
   onAmountChange(e) {
     const amount = e.target.value;
-    if (amount.match(/^\d*(\.\d{0,2})?$/)) {
+    if (!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
       this.setState(() => {
         return {
           amount: amount
         };
       });
     }
+  }
+  onDateChange(createdAt) {
+    if (createdAt) {
+      this.setState(() => {
+        return {
+          createdAt: createdAt
+        };
+      });
+    }
+  }
+  onFocusChange({ focused }) {
+    this.setState(() => {
+      return {
+        calanderFocused: focused
+      };
+    });
   }
   render() {
     return (
@@ -61,6 +87,15 @@ export default class ExpenseForm extends Component {
             placeholder="Add A Note (Optional)"
             value={this.state.note}
             onChange={this.onNoteChange}
+          />
+          <SingleDatePicker
+            date={this.state.createdAt} // momentPropTypes.momentObj or null
+            onDateChange={this.onDateChange} // PropTypes.func.isRequired
+            focused={this.state.calanderFocused} // PropTypes.bool
+            onFocusChange={this.onFocusChange} // PropTypes.func.isRequired
+            id="datePicker" // PropTypes.string.isRequired,
+            numberOfMonths={1}
+            isOutsideRange={() => false}
           />
           <button type="submit">Add Expense</button>
         </form>
