@@ -9,11 +9,12 @@ console.log(now);
 export default class ExpenseForm extends Component {
   constructor(props) {
     super(props);
+    const expense = props.expense;
     this.state = {
-      description: '',
-      note: '',
-      amount: '',
-      createdAt: moment(),
+      description: expense ? expense.description : '',
+      note: expense ? expense.note : '',
+      amount: expense ? (expense.amount / 100).toString() : '',
+      createdAt: expense ? moment(expense.createdAt) : moment(),
       calanderFocused: false,
       error: ''
     };
