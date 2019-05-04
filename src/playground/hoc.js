@@ -1,6 +1,6 @@
 //  Higher Order Component - A component(HOC) that renders other component
 //  Reuse code
-//  Rednder hijacking
+//  Render hijacking
 //  prop maipulation
 //  Abstract state
 

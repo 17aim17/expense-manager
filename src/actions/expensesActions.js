@@ -1,7 +1,5 @@
 import uuidv1 from 'uuid/v1';
-// ============================
-// Actions Generators
-// ============================
+
 //Add_Expenses
 export const addExpenses = ({
   description = '',
@@ -20,6 +18,7 @@ export const addExpenses = ({
     }
   };
 };
+
 // Remove_Expenses
 export const removeExpenses = ({ id } = {}) => {
   return {
@@ -29,7 +28,6 @@ export const removeExpenses = ({ id } = {}) => {
 };
 
 // Edit_Expenses
-
 export const editExpense = (id, updates) => {
   return {
     type: 'EDIT_EXPENSE',

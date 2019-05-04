@@ -1,7 +1,7 @@
 import React from 'react';
 import ExpenseForm from './ExpenseForm';
 import { connect } from 'react-redux';
-import { addExpenses } from '../actions/expenses';
+import { addExpenses } from '../actions/expensesActions';
 const AddExpensePage = props => {
   return (
     <div>

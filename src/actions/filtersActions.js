@@ -1,7 +1,3 @@
-// ============================
-// Filters reducers
-// ============================
-
 // Set_Text_Filter
 export const setTextFilter = (text = '') => {
   return {

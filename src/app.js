@@ -6,19 +6,10 @@ import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 
 import AppRouter from './routers/AppRouter';
-
 import configureStore from './store/configureStore';
-import { addExpenses } from './actions/expenses';
-// import { setTextFilter } from './actions/filters';
-// import getVisibleExpenses from './selectors/expenses';
+import { addExpenses } from './actions/expensesActions';
 
 const store = configureStore();
-
-// store.subscribe(() => {
-//   const state = store.getState();
-//   const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
-//   console.log(visibleExpenses);
-// });
 
 store.dispatch(
   addExpenses({ description: 'Water Bill', amount: 1100, createdAt: 19 })

@@ -3,13 +3,15 @@ import moment from 'moment';
 import { SingleDatePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 
-const now = moment().format('ddd , MMM Do YYYY');
+const now = moment().format('ddd, MMM Do YYYY');
 console.log(now);
 
 export default class ExpenseForm extends Component {
   constructor(props) {
     super(props);
+
     const expense = props.expense;
+
     this.state = {
       description: expense ? expense.description : '',
       note: expense ? expense.note : '',
@@ -18,6 +20,7 @@ export default class ExpenseForm extends Component {
       calanderFocused: false,
       error: ''
     };
+
     this.onDescriptionChange = this.onDescriptionChange.bind(this);
     this.onNoteChange = this.onNoteChange.bind(this);
     this.onAmountChange = this.onAmountChange.bind(this);
@@ -25,6 +28,7 @@ export default class ExpenseForm extends Component {
     this.onFocusChange = this.onFocusChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+
   onDescriptionChange(e) {
     const description = e.target.value;
     this.setState(() => {
@@ -33,6 +37,7 @@ export default class ExpenseForm extends Component {
       };
     });
   }
+
   onNoteChange(e) {
     const note = e.target.value;
     this.setState(() => {
@@ -41,6 +46,7 @@ export default class ExpenseForm extends Component {
       };
     });
   }
+
   onAmountChange(e) {
     const amount = e.target.value;
     if (!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
@@ -51,6 +57,7 @@ export default class ExpenseForm extends Component {
       });
     }
   }
+
   onDateChange(createdAt) {
     if (createdAt) {
       this.setState(() => {
@@ -60,6 +67,7 @@ export default class ExpenseForm extends Component {
       });
     }
   }
+
   onFocusChange({ focused }) {
     this.setState(() => {
       return {
@@ -67,6 +75,7 @@ export default class ExpenseForm extends Component {
       };
     });
   }
+
   onSubmit(e) {
     e.preventDefault();
     if (!this.state.description || !this.state.amount) {
@@ -82,6 +91,7 @@ export default class ExpenseForm extends Component {
           error: ''
         };
       });
+
       this.props.onSubmit({
         //this is the props coming from AddExpensePage
         description: this.state.description,
@@ -91,6 +101,7 @@ export default class ExpenseForm extends Component {
       });
     }
   }
+
   render() {
     return (
       <div>

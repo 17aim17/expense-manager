@@ -1,7 +1,5 @@
-// ============================
-//  Expenses reducer
-// ============================
-const expensesReducer = (state = [], action) => {
+const initialState = [];
+const expensesReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_EXPENSE':
       return [...state, action.expense];
