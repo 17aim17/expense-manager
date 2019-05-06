@@ -7,19 +7,11 @@ import './styles/styles.scss';
 
 import AppRouter from './routers/AppRouter';
 import configureStore from './store/configureStore';
-import { addExpenses } from './actions/expensesActions';
+import { startSetExpenses } from './actions/expensesActions';
+
+import './firebase/firebase';
 
 const store = configureStore();
-
-store.dispatch(
-  addExpenses({ description: 'Water Bill', amount: 1100, createdAt: 19 })
-);
-store.dispatch(
-  addExpenses({ description: 'Rent Bill', amount: 1095, createdAt: 21 })
-);
-store.dispatch(
-  addExpenses({ description: 'Electricity Bill', amount: 10, createdAt: 200 })
-);
 
 const jsx = (
   <Provider store={store}>
@@ -27,4 +19,8 @@ const jsx = (
   </Provider>
 );
 
-ReactDOM.render(jsx, document.getElementById('app'));
+ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
+
+store.dispatch(startSetExpenses()).then(() => {
+  ReactDOM.render(jsx, document.getElementById('app'));
+});
