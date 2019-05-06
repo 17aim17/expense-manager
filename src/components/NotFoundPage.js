@@ -2,9 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 const NotFoundPage = () => {
   return (
-    <div>
+    <div className="content-container">
       <p>
-        404 Not Found <Link to="/">Go Home</Link>
+        404 Not Found{' '}
+        <Link className="button button--danger" to="/">
+          Go Home
+        </Link>
       </p>
     </div>
   );

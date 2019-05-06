@@ -10,7 +10,7 @@ import configureStore from './store/configureStore';
 import { startSetExpenses } from './actions/expensesActions';
 import { login, logout } from './actions/authActions';
 import { firebase } from './firebase/firebase';
-
+import LoadingPage from './components/LoadingPage';
 const store = configureStore();
 
 const jsx = (
@@ -27,7 +27,7 @@ const renderApp = () => {
   }
 };
 
-ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
+ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
@@ -36,7 +36,6 @@ firebase.auth().onAuthStateChanged(user => {
       renderApp();
       if (history.location.pathname === '/') history.push('/dashboard');
     });
-    console.log('log in');
   } else {
     store.dispatch(logout());
     renderApp();

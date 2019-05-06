@@ -9,21 +9,31 @@ import {
 const EditExpensePage = props => {
   return (
     <div>
-      <ExpenseForm
-        expense={props.expense}
-        onSubmit={expense => {
-          props.startEditExpense(props.expense.id, expense);
-          props.history.push('/');
-        }}
-      />
-      <button
-        onClick={() => {
-          props.startRemoveExpense(props.expense);
-          props.history.push('/');
-        }}
-      >
-        &times;
-      </button>
+      <div className="page-header">
+        <div className="content-container">
+          <div className="header__content">
+            <h1 className="page-header__title">Edit Expense</h1>
+            <button
+              className="button button--danger"
+              onClick={() => {
+                props.startRemoveExpense(props.expense);
+                props.history.push('/');
+              }}
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+      <div className="content-container">
+        <ExpenseForm
+          expense={props.expense}
+          onSubmit={expense => {
+            props.startEditExpense(props.expense.id, expense);
+            props.history.push('/');
+          }}
+        />
+      </div>
     </div>
   );
 };

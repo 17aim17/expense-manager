@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { startLogout } from '../actions/authActions';
@@ -7,15 +7,17 @@ import { startLogout } from '../actions/authActions';
 // NavLink is better suited for navigation -> styled in custom way
 const Header = props => {
   return (
-    <header>
-      <h1>Expensify</h1>
-      <NavLink to="/dashboard" activeClassName="is-active">
-        Dashboard
-      </NavLink>
-      <NavLink to="/create" activeClassName="is-active">
-        Add Expense
-      </NavLink>
-      <button onClick={props.startLogout}>Logout</button>
+    <header className="header">
+      <div className="content-container">
+        <div className="header__content">
+          <Link className="header__title" to="/dashboard">
+            <h1>Expensify</h1>
+          </Link>
+          <button className="button button--link" onClick={props.startLogout}>
+            Logout
+          </button>
+        </div>
+      </div>
     </header>
   );
 };
